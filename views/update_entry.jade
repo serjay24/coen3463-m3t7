@@ -6,7 +6,7 @@ block content
     | Edit Info
   br
   .inputfield
-    form(method= 'PUT', action= '/tutorials/new', onsubmit= 'return validateForm()')
+    form(method= 'POST', action= '/tutorials/' + videoInfo._id, onsubmit= 'return validateForm()')
 
       .container.black(style= 'padding: 1%')
         .row.white-text

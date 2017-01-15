@@ -119,6 +119,37 @@ MongoClient.connect(mdbUrl, function(err, database) {
 		}); 
 	})
 
+	app.post('/tutorials/:videoId', function(req, res){
+
+		var videoId = req.params.videoId;
+
+		var newData = {
+			title: req.body.title,
+			uploadersName: req.body.uploadersName,
+			uploadersYoutubeLink: req.body.uploadersYoutubeLink,
+			youtubeLink: req.body.youtubeLink,
+			description: req.body.description,
+			publishDate: req.body.publishDate,
+			category: req.body.category,
+			views: req.body.views,
+			likes: req.body.likes,
+			embed: req.body.embed,
+			updated: getDate
+		}
+
+		
+		var tutorialCollection = db.collection('tutorials');
+		tutorialCollection.updateOne({_id: new ObjectId(videoId)}, {$set: newData}, function(err, result) {
+			if(err) {
+				console.log("Item not updated!");
+			}
+			else {
+				console.log("Item Updated!")
+				res.redirect('/tutorials')
+			}
+		}); 
+	});
+
 	// catch 404 and forward to error handler
 	app.use(function(req, res, next) {
   		var err = new Error('Not Found');
