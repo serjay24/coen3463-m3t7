@@ -1,0 +1,54 @@
+extends layout
+
+block content
+
+  br
+
+  .container.white(style= 'padding: 2%')
+    h5= videoInfo.title
+    .row
+      .col.s12.m12.l12.black-text
+        .video-container
+          iframe(width= '853', height: '15', src= videoInfo.embed, frameborder= '0', allowfullscreen)
+
+        br
+
+        p
+          b.red-text
+            | Uploaded by: 
+          | #{videoInfo.uploadersName}
+          br
+          br
+          b.red-text
+            | Uploader's YouTube Page: 
+          a.black-text(href= videoInfo.uploadersYoutubeLink, target= '_blank')= videoInfo.uploadersYoutubeLink
+          br
+          br
+          b.red-text
+            | YouTube Link: 
+          a.black-text(href= videoInfo.uploadersYoutubeLink, target= '_blank')= videoInfo.youtubeLink
+          br
+          br
+          b.red-text
+            | Description: 
+          | #{videoInfo.description}
+          br
+          br
+          b.red-text
+            | Publish Date: 
+          | #{videoInfo.publishDate}
+          br
+          br
+          b.red-text
+            | Category: 
+          | #{videoInfo.category}
+          br
+          br
+          b.red-text
+            | Number of Views: 
+          | #{videoInfo.views}
+          br
+          br
+          b.red-text
+            | Number of Likes: 
+          | #{videoInfo.likes}

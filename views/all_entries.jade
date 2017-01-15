@@ -10,8 +10,8 @@ block content
     thead.blue
       tr
         th(style= 'width: 10%') Uploaded by
-        th(style= 'width: 20%') Title
-        th(style= 'width: 20%') Description
+        th(style= 'width: 30%') Title
+        th(style= 'width: 30%') Description
         th(style= 'width: 5%') Date Created
         th(style= 'width: 5%') Date Updated
     tbody.white
@@ -19,7 +19,7 @@ block content
           tr
             td= tutorial.uploadersName
             td
-              a.red-text(href= "#")= tutorial.title
+              a.red-text(href= "/tutorials/" + tutorial._id)= tutorial.title
             td= tutorial.description
             td= tutorial.created
             td= tutorial.updated

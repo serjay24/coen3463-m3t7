@@ -45,6 +45,7 @@ MongoClient.connect(mdbUrl, function(err, database) {
 
 	app.use('/', index);
 	
+	//List all the entries
 	app.get('/tutorials', function(req, res) {
 		var tutorialCollection = db.collection('tutorials');
 		tutorialCollection.find().toArray(function(err, tutorials) {
@@ -55,6 +56,7 @@ MongoClient.connect(mdbUrl, function(err, database) {
 		})
 	});
 
+	//Adding New Entry
 	app.get('/tutorials/new', function(req, res) {
 		console.log();
 		var data = {
@@ -93,6 +95,17 @@ MongoClient.connect(mdbUrl, function(err, database) {
 		  		res.redirect('/tutorials/new');
 		  	}
 		  });
+	});
+
+	//Page of each Entry
+	app.get('/tutorials/:videoId', function(req, res) {
+		var videoId = req.params.videoId;
+		var tutorialCollection = db.collection('tutorials');
+		tutorialCollection.findOne({_id: new ObjectId(videoId)}, function(err, info) {
+			res.render('entry', {
+				videoInfo: info
+			});
+		}); 
 	});
 
 	// catch 404 and forward to error handler
