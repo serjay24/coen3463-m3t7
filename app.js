@@ -119,6 +119,7 @@ MongoClient.connect(mdbUrl, function(err, database) {
 		}); 
 	})
 
+	//POST Method when updating an entry
 	app.post('/tutorials/:videoId', function(req, res){
 
 		var videoId = req.params.videoId;
@@ -145,6 +146,22 @@ MongoClient.connect(mdbUrl, function(err, database) {
 			}
 			else {
 				console.log("Item Updated!")
+				res.redirect('/tutorials')
+			}
+		}); 
+	});
+
+	//Delete Entry
+	app.get('/tutorials/:videoId/delete', function(req, res){
+		var videoId = req.params.videoId;
+		
+		var tutorialCollection = db.collection('tutorials');
+		tutorialCollection.deleteOne({_id: new ObjectId(videoId)}, function(err, result) {
+			if(err) {
+				console.log("Item not deleted!");
+			}
+			else {
+				console.log("Item deleted!")
 				res.redirect('/tutorials')
 			}
 		}); 

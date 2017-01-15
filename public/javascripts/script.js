@@ -92,3 +92,7 @@ function validateForm() {
 		errorMessage = "The following field/s are required and should not be empty: \n\n";
 	}
 }
+
+function confirmDelete() {
+	alert("This entry wil be deleted. Once deleted it can never be retrieved. Do you want to continue?")
+}

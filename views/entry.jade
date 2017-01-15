@@ -58,18 +58,18 @@ block content
           i.fa.fa-pencil.left.small
           | Update Info
       .col.l6.hide-on-med-and-down
-        a.waves-effect.waves-red.btn-flat.white-text.red(href= '#')
+        a.waves-effect.waves-red.btn-flat.white-text.red(href= '/tutorials/' + videoInfo._id + '/delete', onclick= 'return confirmDelete()')
           i.fa.fa-trash.left.small
           | Delete
 
     .row.hide-on-large-only
       .col.s12.m12
-        a.waves-effect.waves-white.btn-flat.white-text.blue.truncate(href= '#')
+        a.waves-effect.waves-white.btn-flat.white-text.blue.truncate(href= '/tutorials/' + videoInfo._id + '/edit')
           i.fa.fa-pencil.left.small
           | Update Info
     br
     .row.hide-on-large-only
       .col.s12.m12
-        a.waves-effect.waves-red.btn-flat.white-text.red(href= '#')
+        a.waves-effect.waves-red.btn-flat.white-text.red(href= '/tutorials/' + videoInfo._id + '/delete', onclick= 'return confirmDelete()')
           i.fa.fa-trash.left.small
           | Delete
