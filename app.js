@@ -45,7 +45,15 @@ MongoClient.connect(mdbUrl, function(err, database) {
 
 	app.use('/', index);
 	
-
+	app.get('/tutorials', function(req, res) {
+		var tutorialCollection = db.collection('tutorials');
+		tutorialCollection.find().toArray(function(err, tutorials) {
+			console.log('Tutorials Loaded!');
+			res.render('all_entries', {
+				tutorials: tutorials
+			});
+		})
+	});
 
 	app.get('/tutorials/new', function(req, res) {
 		console.log();
@@ -56,6 +64,7 @@ MongoClient.connect(mdbUrl, function(err, database) {
 		addStatus = "";
 	});
 
+	//POST Method when submitting new Entry
 	app.post('/tutorials/new', function(req, res) {
 		var dataToSave = {
 			title: req.body.title,

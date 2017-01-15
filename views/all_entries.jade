@@ -1,0 +1,25 @@
+extends layout
+
+block content
+
+  h1.white-text.center List of Node.js and Express Tutorials
+
+  br
+
+  table.striped.bordered.responsive-table
+    thead.blue
+      tr
+        th(style= 'width: 10%') Uploaded by
+        th(style= 'width: 20%') Title
+        th(style= 'width: 20%') Description
+        th(style= 'width: 5%') Date Created
+        th(style= 'width: 5%') Date Updated
+    tbody.white
+      each tutorial, i in tutorials
+          tr
+            td= tutorial.uploadersName
+            td
+              a.red-text(href= "#")= tutorial.title
+            td= tutorial.description
+            td= tutorial.created
+            td= tutorial.updated
