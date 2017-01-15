@@ -21,12 +21,12 @@ block content
           br
           b.red-text
             | Uploader's YouTube Page: 
-          a.black-text(href= videoInfo.uploadersYoutubeLink, target= '_blank')= videoInfo.uploadersYoutubeLink
+          a.black-text.truncate(href= videoInfo.uploadersYoutubeLink, target= '_blank')= videoInfo.uploadersYoutubeLink
           br
           br
           b.red-text
             | YouTube Link: 
-          a.black-text(href= videoInfo.uploadersYoutubeLink, target= '_blank')= videoInfo.youtubeLink
+          a.black-text.truncate(href= videoInfo.uploadersYoutubeLink, target= '_blank')= videoInfo.youtubeLink
           br
           br
           b.red-text
@@ -52,3 +52,11 @@ block content
           b.red-text
             | Number of Likes: 
           | #{videoInfo.likes}
+      .col.s12.m4.l3.offset-l3.offset-m3
+        a.waves-effect.waves-white.btn-flat.white-text.blue.truncate(href= '#')
+          i.fa.fa-pencil.left.small
+          | Update Info
+      .col.s12.m4.l6
+        a.waves-effect.waves-red.btn-flat.white-text.red(href= '#')
+          i.fa.fa-trash.left.small
+          | Delete
