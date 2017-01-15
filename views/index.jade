@@ -26,23 +26,25 @@ block content
   br
   br
   .container
-    .row
+    .row.black-text
       .col.s12.m6.l6.center.flow-text
-        .card.blue.lighten-2
-          i.fa.fa-search.large
-          br
-          b
-            | View all the list of Tutorial
-          br
-          b
-            | About Node.js and Express.js
+        a.black-text(href= '#')
+          .card.indigo.accent-2
+            i.fa.fa-search.large
+            br
+            b
+              | View all the list of Tutorial
+            br
+            b
+              | About Node.js and Express.js
       .col.s12.m6.l6.center
-        .card.white.flow-text
-          i.fa.fa-plus-square-o.large
-          br
-          b
-            | Help us add video tutorial
-          br
-          b
-            | About Node.js and Express.js
-          br
+        a.black-text(href= 'tutorials/new')
+          .card.white.flow-text
+            i.fa.fa-plus-square-o.large
+            br
+            b
+              | Help us add video tutorial
+            br
+            b
+              | About Node.js and Express.js
+            br

@@ -4,43 +4,104 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var date = new Date();
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
+var MongoClient = require('mongodb').MongoClient;
+var ObjectId = require('mongodb').ObjectId;
+
 var app = express();
+var db;
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+var addStatus;
+var getDate = (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+var mdbUrl = "mongodb://admin:admin@ds111589.mlab.com:11589/top-youtube-videos-for-node-js-express-js"
 
-app.use('/', index);
-app.use('/users', users);
+MongoClient.connect(mdbUrl, function(err, database) {
+    if (err) {
+        console.log(err)
+        return;
+    }
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+    console.log("Connected to DB!");
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    // set database
+    db = database;
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+	// view engine setup
+	app.set('views', path.join(__dirname, 'views'));
+	app.set('view engine', 'jade');
+
+	// uncomment after placing your favicon in /public
+	//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+	app.use(logger('dev'));
+	app.use(bodyParser.json());
+	app.use(bodyParser.urlencoded({ extended: false }));
+	app.use(cookieParser());
+	app.use(express.static(path.join(__dirname, 'public')));
+
+	app.use('/', index);
+	
+
+
+	app.get('/tutorials/new', function(req, res) {
+		console.log();
+		var data = {
+			status: addStatus
+		}
+		res.render('new_entry', data);
+		addStatus = "";
+	});
+
+	app.post('/tutorials/new', function(req, res) {
+		var dataToSave = {
+			title: req.body.title,
+			uploadersName: req.body.uploadersName,
+			uploadersYoutubeLink: req.body.uploadersYoutubeLink,
+			youtubeLink: req.body.youtubeLink,
+			description: req.body.description,
+			publishDate: req.body.publishDate,
+			category: req.body.category,
+			views: req.body.views,
+			likes: req.body.likes,
+			created: getDate,
+			updated: getDate
+		};
+
+		db.collection('tutorials')
+		  .save(dataToSave, function(err, tutorial) {
+		  	if(err) {
+		  		console.log('Saving Data Failed!');
+		  		addStatus = 'Saving Data Failed!';
+		  	}
+		  	else {
+		  		console.log('Saving Data Successful!');
+		  		addStatus = 'Saving Data Success';
+		  		res.redirect('/tutorials/new');
+		  	}
+		  });
+	});
+
+	// catch 404 and forward to error handler
+	app.use(function(req, res, next) {
+  		var err = new Error('Not Found');
+  		err.status = 404;
+  		next(err);
+	});
+
+	// error handler
+	app.use(function(err, req, res, next) {
+  		// set locals, only providing error in development
+  		res.locals.message = err.message;
+  		res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  		// render the error page
+  		res.status(err.status || 500);
+  		res.render('error');
+	});
 });
 
 module.exports = app;

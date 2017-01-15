@@ -2,3 +2,42 @@ body {
 	font-family: 'Ubuntu', sans-serif;
 	background-image: url('../images/background.jpg')
 }
+
+a {
+	text-decoration: none;
+}
+
+textarea::-webkit-input-placeholder,
+input::-webkit-input-placeholder {
+	color: gray !important;
+}
+ 
+textarea:-moz-placeholder,
+input:-moz-placeholder { /* Firefox 18- */
+	color: gray !important;
+}
+ 
+textarea::-moz-placeholder,
+input::-moz-placeholder {  /* Firefox 19+ */
+	color: gray !important;
+}
+
+textarea:-ms-input-placeholder,
+input:-ms-input-placeholder {
+	color: gray !important;
+}
+
+.input-field input[type=text]:focus {
+     border: 2px solid blue;
+     box-shadow: 0 1px 0 0 blue;
+}
+
+#message:focus {
+     border: 2px solid blue;
+     box-shadow: 0 1px 0 0 blue;
+}
+
+.btn-flat {
+	text-transform: capitalize;
+	color: white;
+}
