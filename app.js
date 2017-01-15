@@ -146,7 +146,7 @@ MongoClient.connect(mdbUrl, function(err, database) {
 			}
 			else {
 				console.log("Item Updated!")
-				res.redirect('/tutorials/:videoId')
+				res.redirect('/tutorials/' + videoId)
 			}
 		}); 
 	});
