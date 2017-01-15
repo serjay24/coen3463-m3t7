@@ -68,7 +68,8 @@ MongoClient.connect(mdbUrl, function(err, database) {
 			views: req.body.views,
 			likes: req.body.likes,
 			created: getDate,
-			updated: getDate
+			updated: getDate,
+			embed: req.body.embed
 		};
 
 		db.collection('tutorials')
