@@ -1,5 +1,48 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+
+  .slider
+    ul.slides
+      li
+        img(src='http://lorempixel.com/580/250/nature/1')
+        // random image
+        .caption.center-align
+          h3 This is our big Tagline!
+          h5.light.grey-text.text-lighten-3 Here's our small slogan.
+      li
+        img(src='http://lorempixel.com/580/250/nature/2')
+        // random image
+        .caption.left-align
+          h3 Left Aligned Caption
+          h5.light.grey-text.text-lighten-3 Here's our small slogan.
+      li
+        img(src='http://lorempixel.com/580/250/nature/3')
+        // random image
+        .caption.right-align
+          h3 Right Aligned Caption
+          h5.light.grey-text.text-lighten-3 Here's our small slogan.
+
+  br
+  br
+  .container
+    .row
+      .col.s12.m6.l6.center.flow-text
+        .card.blue.lighten-2
+          i.fa.fa-search.large
+          br
+          b
+            | View all the list of Tutorial
+          br
+          b
+            | About Node.js and Express.js
+      .col.s12.m6.l6.center
+        .card.white.flow-text
+          i.fa.fa-plus-square-o.large
+          br
+          b
+            | Help us add video tutorial
+          br
+          b
+            | About Node.js and Express.js
+          br
