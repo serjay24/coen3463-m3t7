@@ -108,6 +108,17 @@ MongoClient.connect(mdbUrl, function(err, database) {
 		}); 
 	});
 
+	//Edit Page
+	app.get('/tutorials/:videoId/edit', function(req, res) {
+		var videoId = req.params.videoId;
+		var tutorialCollection = db.collection('tutorials');
+		tutorialCollection.findOne({_id: new ObjectId(videoId)}, function(err, info) {
+			res.render('update_entry', {
+				videoInfo: info
+			});
+		}); 
+	})
+
 	// catch 404 and forward to error handler
 	app.use(function(req, res, next) {
   		var err = new Error('Not Found');

@@ -52,11 +52,24 @@ block content
           b.red-text
             | Number of Likes: 
           | #{videoInfo.likes}
-      .col.s12.m4.l3.offset-l3.offset-m3
+    .row
+      .col.l3.offset-l3.hide-on-med-and-down
+        a.waves-effect.waves-white.btn-flat.white-text.blue.truncate(href= '/tutorials/' + videoInfo._id + '/edit')
+          i.fa.fa-pencil.left.small
+          | Update Info
+      .col.l6.hide-on-med-and-down
+        a.waves-effect.waves-red.btn-flat.white-text.red(href= '#')
+          i.fa.fa-trash.left.small
+          | Delete
+
+    .row.hide-on-large-only
+      .col.s12.m12
         a.waves-effect.waves-white.btn-flat.white-text.blue.truncate(href= '#')
           i.fa.fa-pencil.left.small
           | Update Info
-      .col.s12.m4.l6
+    br
+    .row.hide-on-large-only
+      .col.s12.m12
         a.waves-effect.waves-red.btn-flat.white-text.red(href= '#')
           i.fa.fa-trash.left.small
           | Delete

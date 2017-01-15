@@ -1,0 +1,51 @@
+extends layout
+
+block content
+
+  h1.center-align.white-text
+    | Edit Info
+  br
+  .inputfield
+    form(method= 'PUT', action= '/tutorials/new', onsubmit= 'return validateForm()')
+
+      .container.black(style= 'padding: 1%')
+        .row.white-text
+          .col.s12.m12.l6
+            | Title
+            br
+            input.white.black-text#title(type= 'text', placeholder= "NodeJS Tutorial for Beginners", name= 'title', value= videoInfo.title)
+          .col.s12.m12.l6
+            | Uploader's Name
+            br
+            input.white.black-text#name(type= 'text', placeholder= "Juan Dela Cruz", name= 'uploadersName', value= videoInfo.uploadersName)
+          .col.s12.m12.l6
+            | Uploaders YouTube Link
+            input.white.black-text#profile(type= 'text', placeholder= "www.youtube.com/juanDC", name= 'uploadersYoutubeLink', value= videoInfo.uploadersYoutubeLink)
+          .col.s12.m12.l6
+            | YouTube Link of the Video
+            input.white.black-text#videoLink(type= 'text', placeholder= "www.youtube.com/######", name= 'youtubeLink', value= videoInfo.youtubeLink)
+          .col.s12.m12.l12
+            | Description
+            textarea.materialize-textarea.white.black-text#description(name= 'description', placeholder= 'Step-by-Step Tutorial of Node.js')= videoInfo.description
+          .col.s12.m12.l6
+            | Publish Date
+            input.white.black-text#publishDate(type= 'text', placeholder= "01/01/2017", name= 'publishDate', value= videoInfo.publishDate)
+          .col.s12.m12.l6
+            | Category
+            input.white.black-text#category(type= 'text', placeholder= "Programming", name= 'category', value= videoInfo.category)
+          .col.s12.m12.l6
+            | Number of Views
+            input.white.black-text#views(type= 'text', placeholder= "1000000", name= 'views', value= videoInfo.views)
+          .col.s12.m12.l6
+            | Number of Likes
+            input.white.black-text#likes(type= 'text', placeholder= "1000000", name= 'likes', value= videoInfo.likes)
+          .col.s12.m12.l12
+            | Embed Video Link
+            input.white.black-text#embedLink(type= 'text', placeholder= "https://www.youtube.com/embed/Q8TXgCzxEnw", name= 'embed', value= videoInfo.embed)
+          .col.s12.m6.l4
+            button.waves-effect.waves-white.btn-flat.blue
+              | Update Entry
+              i.fa.fa-paper-plane.left.small
+          .col.s12.m6.l4
+            p= status
+  br
