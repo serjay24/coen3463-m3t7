@@ -25,14 +25,16 @@ html
 
     nav.blue
       .nav-wrapper
-        a.brand-logo.left.hide-on-small-only(href='#') ExpressVids
-        a.brand-logo.center.hide-on-med-and-up(href='#') ExpressVids
+        a.brand-logo.left.hide-on-small-only(href='/') ExpressVids
+        a.brand-logo.center.hide-on-med-and-up(href='/') ExpressVids
 
         a.button-collapse(href='#', data-activates='mobile-demo')
           i.material-icons menu
         ul#nav-mobile.left.hide-on-med-and-down.right
           li
-            a(href='/') Home
+            a(href='/')
+              i.fa.fa-home.left.small
+              | Home
           li
             a(href='/tutorials') All List
           li
