@@ -43,7 +43,7 @@ MongoClient.connect(mdbUrl, function(err, database) {
 	app.use(cookieParser());
 	app.use(express.static(path.join(__dirname, 'public')));
 
-	//app.use('/', index);
+	app.use('/', index);
 	
 	//List all the entries
 	app.get('/tutorials', function(req, res) {
