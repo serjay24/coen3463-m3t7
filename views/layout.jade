@@ -18,15 +18,20 @@ html
     // Import Font Awesome Icons
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
     
-    //Stylesheets.css
+    // Stylesheets.css
     link(rel= 'stylesheet', type= 'text/css', href= '../../stylesheets/style.css')
+
+    // Icon
+    link(rel= 'icon', href= 'images/logo.png')
 
   body
 
     nav.blue
       .nav-wrapper
-        a.brand-logo.left.hide-on-small-only(href='/') ExpressVids
-        a.brand-logo.center.hide-on-med-and-up(href='/') ExpressVids
+        a.brand-logo.left.hide-on-small-only(href='/')
+          img(src= '../../images/logo-large.png')
+        a.brand-logo.center.hide-on-med-and-up(href='/')
+          img(src= '../../images/logo.png')
 
         a.button-collapse(href='#', data-activates='mobile-demo')
           i.material-icons menu
@@ -54,6 +59,33 @@ html
               | Add New Entry
   
     block content
+
+     // Footer of the website
+    footer.page-footer.blue
+      .container
+        .row
+          p.center
+            | Created by 
+            b
+              a.link(href= 'http://coen3463-m1t7.herokuapp.com/member/delRosario.html', target= '_blank') Rish Joy Del Rosario
+            |  and 
+            b
+              a.link(href= 'http://coen3463-m1t7.herokuapp.com/member/ilaga.html', target='_blank') Serjay Ilaga
+            | .
+            |         This project can be found on 
+            b GitHub
+          .container.center
+            a.waves-effect.waves-light.btn-flat.center.black.white-text(href= 'https://github.com/serjay24/coen3463-m3t7', target= '_blank', style= 'text-transform: capitalize')
+              i.fa.fa-github-alt.left.small
+              | GitHub Project
+      .footer-copyright.blue.lighten-1.black-text
+        .row.center
+          .col.s2.m4.l4.hide-on-small-only Software Engineering
+          .col.s12.m4.l4.hide-on-small-only
+            b © 2017 - COEN3463
+          .col.s12.hide-on-med-and-up.truncate
+            b © 2016 - COEN3463 - Software Engineering
+          .col.s2.m4.l4.hide-on-small-only Engr. Gino Tria
 
     script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js')

@@ -7,6 +7,11 @@ a {
 	text-decoration: none;
 }
 
+.link {
+	color: black;
+	text-decoration: underline;
+}
+
 textarea::-webkit-input-placeholder,
 input::-webkit-input-placeholder {
 	color: gray !important;
