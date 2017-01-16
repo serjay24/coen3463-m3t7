@@ -43,7 +43,7 @@ MongoClient.connect(mdbUrl, function(err, database) {
 	app.use(cookieParser());
 	app.use(express.static(path.join(__dirname, 'public')));
 
-	app.use('/', index);
+	//app.use('/', index);
 	
 	//List all the entries
 	app.get('/tutorials', function(req, res) {
@@ -51,6 +51,7 @@ MongoClient.connect(mdbUrl, function(err, database) {
 		tutorialCollection.find().toArray(function(err, tutorials) {
 			console.log('Tutorials Loaded!');
 			res.render('all_entries', {
+				title: 'All Entries',
 				tutorials: tutorials
 			});
 		})
@@ -60,6 +61,7 @@ MongoClient.connect(mdbUrl, function(err, database) {
 	app.get('/tutorials/new', function(req, res) {
 		console.log();
 		var data = {
+			title: 'Add New Entry',
 			status: addStatus
 		}
 		res.render('new_entry', data);
@@ -103,6 +105,7 @@ MongoClient.connect(mdbUrl, function(err, database) {
 		var tutorialCollection = db.collection('tutorials');
 		tutorialCollection.findOne({_id: new ObjectId(videoId)}, function(err, info) {
 			res.render('entry', {
+				title: info.title,
 				videoInfo: info
 			});
 		}); 
@@ -114,6 +117,7 @@ MongoClient.connect(mdbUrl, function(err, database) {
 		var tutorialCollection = db.collection('tutorials');
 		tutorialCollection.findOne({_id: new ObjectId(videoId)}, function(err, info) {
 			res.render('update_entry', {
+				title: 'Update Entry',
 				videoInfo: info
 			});
 		}); 
