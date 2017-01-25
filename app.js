@@ -46,7 +46,7 @@ MongoClient.connect(mdbUrl, function(err, database) {
 	app.use('/', index);
 
 	//sign-up
-	app.get('/sign-up', function(req, res) {
+	app.get('/tutorials/sign_up', function(req, res) {
 		console.log();
 		var data = {
 			title: 'Sign-up',
