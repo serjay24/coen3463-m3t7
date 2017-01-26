@@ -44,6 +44,18 @@ MongoClient.connect(mdbUrl, function(err, database) {
 	app.use(express.static(path.join(__dirname, 'public')));
 
 	app.use('/', index);
+
+	//sign-up
+	app.get('/sign_up', function(req, res) {
+		console.log();
+		var data = {
+			title: 'Sign-up',
+		}
+		res.render('sign_up', data);
+		
+	});
+
+
 	
 	//List all the entries
 	app.get('/tutorials', function(req, res) {
