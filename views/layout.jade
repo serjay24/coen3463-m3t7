@@ -23,7 +23,7 @@ html
 
   body
 
-    nav.blue
+    nav
       .nav-wrapper
         a.brand-logo.left.hide-on-small-only(href='/')
           img(src= '../../images/logo-large.png')
@@ -41,6 +41,8 @@ html
             a(href='/tutorials') All List
           li
             a(href='/tutorials/new') Add New Entry
+          li
+            a(href='/sign_up') Sign Up 
         ul#mobile-demo.side-nav.blue
           li
             a.white-text.waves-effect.waves-white(href='/')
@@ -54,19 +56,24 @@ html
             a.white-text.waves-effect.waves-white(href='/tutorials/new')
               i.fa.fa-plus-square-o.left.small.white-text
               | Add New Entry
+          li
+            a.white-text.waves-effect.waves-white(href='/tutorials/new')
+              i.fa.fa-plus-square-o.left.small.white-text
+              | Sign Up
+                  
   
     block content
 
      // Footer of the website
-    footer.page-footer.blue
+    footer.page-footer
       .container
         .row
-          p.center
+          p.center.white-text
             | Created by 
             b
               a.link(href= 'http://coen3463-m1t7.herokuapp.com/member/delRosario.html', target= '_blank') Rish Joy Del Rosario
             |  and 
-            b
+            b.white-text
               a.link(href= 'http://coen3463-m1t7.herokuapp.com/member/ilaga.html', target='_blank') Serjay Ilaga
             | .
             |         This project can be found on 
@@ -75,7 +82,7 @@ html
             a.waves-effect.waves-light.btn-flat.center.black.white-text(href= 'https://github.com/serjay24/coen3463-m3t7', target= '_blank', style= 'text-transform: capitalize')
               i.fa.fa-github-alt.left.small
               | GitHub Project
-      .footer-copyright.blue.lighten-1.black-text
+      .footer-copyright.black.lighten-1.white-text
         .row.center
           .col.s2.m4.l4.hide-on-small-only Software Engineering
           .col.s12.m4.l4.hide-on-small-only

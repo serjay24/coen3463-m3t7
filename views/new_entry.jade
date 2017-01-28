@@ -6,8 +6,7 @@ block content
   br
   .inputfield
     form(method= 'POST', action= '/tutorials/new', onsubmit= 'return validateForm()')
-
-      .container.black(style= 'padding: 1%')
+      .rown
         .row.white-text
           .col.s12.m12.l6
             | Title
@@ -15,7 +14,7 @@ block content
             input.white.black-text#title(type= 'text', placeholder= "NodeJS Tutorial for Beginners", name= 'title')
           .col.s12.m12.l6
             | Uploader's Name
-            br
+            
             input.white.black-text#name(type= 'text', placeholder= "Juan Dela Cruz", name= 'uploadersName')
           .col.s12.m12.l6
             | Uploaders YouTube Link

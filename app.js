@@ -57,6 +57,34 @@ MongoClient.connect(mdbUrl, function(err, database) {
 		})
 	});
 
+	//Sign_up
+	app.get('/sign_up', function(req, res) {
+		console.log();
+		var data = {
+			title: 'Sign Up'
+		}
+		res.render('sign_up', data);
+	});
+
+
+	//Login
+	app.get('/login', function(req, res) {
+		console.log();
+		var data = {
+			title: 'Login'
+		}
+		res.render('login', data);
+	});
+
+	//Test
+	app.get('/test', function(req, res) {
+		console.log();
+		var data = {
+			title: 'testing'
+		}
+		res.render('test', data);
+	});
+
 	//Adding New Entry
 	app.get('/tutorials/new', function(req, res) {
 		console.log();

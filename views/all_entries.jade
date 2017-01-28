@@ -7,14 +7,14 @@ block content
   br
 
   table.striped.bordered
-    thead.blue
+    thead
       tr
         th(style= 'width: 10%') Uploaded by
         th(style= 'width: 30%') Title
         th(style= 'width: 30%') Description
         th(style= 'width: 5%') Date Created
         th(style= 'width: 5%') Date Updated
-    tbody.white
+    tbody
       each tutorial, i in tutorials
           tr
             td= tutorial.uploadersName
