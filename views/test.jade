@@ -1,0 +1,40 @@
+extends layout
+
+block content
+
+  .slider
+    ul.slides
+      li
+        img.responsive-img(src='images/slider1.jpg')
+        // random image
+        .caption.left-align
+          h4 ExpressVids
+          h5.light.grey-text.text-lighten-3 The Top Videos for Node.js and ExpressJS
+      li
+        img(src='images/slider2.png')
+        .caption.center-align
+          h5.light.grey-text.text-lighten-3 Create Real-time Application with
+          h4 ExpressJS!
+      li
+        img(src='images/slider3.jpg')
+        // random image
+        .caption.left-align
+          h5.light.grey-text.text-lighten-3 Watch Tutorials for
+          h4 NodeJS!
+          
+
+  br
+  br
+  if(!user)
+    .container
+      .row.black-text
+        .col.s12.m6.l6.center.flow-text
+          a.black-text(href= '/tutorials')
+            .card.accent-2
+              b
+                | Log-in
+        .col.s12.m6.l6.center
+          a.black-text(href= 'tutorials/new')
+            .card.flow-text
+              b
+                | Sign-up

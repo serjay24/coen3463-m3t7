@@ -7,7 +7,7 @@ $(document).ready(function(){
 
  $('.datepicker').pickadate({
     selectMonths: true, // Creates a dropdown to control month
-    selectYears: 80 // Creates a dropdown of 15 years to control year
+    selectYears: 100 // Creates a dropdown of 15 years to control year
   });
  
  $(document).ready(function() {
@@ -23,7 +23,7 @@ function validateForm() {
 	var getProfile = document.getElementById('profile').value;
 	var getVideoLink = document.getElementById('videoLink').value;
 	var getDescription = document.getElementById('description').value;
-	var getPublishDate = document.getElementById('publishDate').value
+	var getPublishDate = document.getElementById('publishDate').value;
 	var getCategory = document.getElementById('category').value;
 	var getViews = document.getElementById('views').value;
 	var getLikes = document.getElementById('likes').value
@@ -107,4 +107,49 @@ function validateForm() {
 
 function confirmDelete() {
 	alert("This entry wil be deleted. Once deleted it can never be retrieved. Do you want to continue?")
+}
+
+function fieldValidate() {
+	var password1 = document.getElementById('password').value;
+	var username = document.getElementById('username').value
+	var email = document.getElementById('email').value;
+
+	var checkCount = 0;
+
+	var errorMessage = "The following field/s are required, should not be empty, or should be corrected: \n\n";
+
+	if(username === "") {
+		errorMessage += "Username - should not be empty\n"
+	}
+	else if(username.length < 8) {
+		errorMessage += "Username - Should contain 8 characters or more!\n"
+	}
+	else {
+		checkCount++;
+	}
+
+	if(email === "") {
+		errorMessage += "Email - should not be empty!\n"
+	}
+	else {
+		checkCount++
+	}
+
+	if(password1 === "") {
+		errorMessage += "Password - should not be empty!\n";
+	}
+	else {
+		checkCount++;
+	}
+
+	if(checkCount === 3) {
+		return true;
+		checkCount = 0;
+	}
+	else {
+		alert(errorMessage);
+		return false;
+		checkCount = 0;
+		errorMessage = "The following field/s are required, should not be empty, or should be corrected: \n\n";
+	}
 }

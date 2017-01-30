@@ -12,39 +12,50 @@ block content
           h5.light.grey-text.text-lighten-3 The Top Videos for Node.js and ExpressJS
       li
         img(src='images/slider2.png')
-        .caption.center-align
-          h5.light.grey-text.text-lighten-3 Create Real-time Application with
-          h4 ExpressJS!
+        .caption.left-align
+          h4.light.grey-text.text-lighten-3 Create Real-time Application with
       li
         img(src='images/slider3.jpg')
         // random image
-        .caption.left-align
-          h5.light.grey-text.text-lighten-3 Watch Tutorials for
-          h4 NodeJS!
+        .caption.center-align
+          h4.light.grey-text.text-lighten-3 Watch Tutorials for
           
 
   br
   br
-  .container
-    .row.black-text
-      .col.s12.m6.l6.center.flow-text
-        a.black-text(href= '/tutorials')
-          .card.accent-2
-            i.fa.fa-search.large
-            br
-            b
-              | View all the list of Tutorial
-            br
-            b
-              | About Node.js and Express.js
-      .col.s12.m6.l6.center
-        a.black-text(href= 'tutorials/new')
-          .card.flow-text
-            i.fa.fa-plus-square-o.large
-            br
-            b
-              | Help us add video tutorial
-            br
-            b
-              | About Node.js and Express.js
-            br
+  if (!user)
+    .container
+      .row.black-text
+        .col.s12.m6.l6.center.flow-text
+          a.black-text(href= '/auth/login')
+            .card.accent-2
+              i.fa.fa-sign-in.large
+              br
+              b
+                | Log-in
+        .col.s12.m6.l6.center.flow-text
+          a.black-text(href= '/auth/register')
+            .card.accent-2
+              i.fa.fa-user-plus.large
+              br
+              b
+                | Sign-up
+  else
+    .container
+      .row.black-text
+        .col.s12.m12.l12.center.flow-text.white-text
+          h2
+            if (user.first_name == "")
+              b
+                | Hello #{user.username}
+            else
+              b
+                | Hello #{user.first_name} #{user.last_name}
+        .col.s12.m12.l12.center.flow-text
+          .container
+            a.black-text(href= '/auth/logout')
+              .card.accent-2
+                i.fa.fa-sign-out.large
+                br
+                b
+                  | Logout

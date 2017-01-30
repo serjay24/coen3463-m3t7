@@ -4,218 +4,78 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var date = new Date();
+
+var mongoose = require('mongoose');
+var session = require('express-session');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var mongo = require('mongodb');
+
+var mdbUrl = "mongodb://admin:admin@ds111589.mlab.com:11589/top-youtube-videos-for-node-js-express-js";
+var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }, 
+                replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };
+mongoose.connect(mdbUrl, options, function(err, res) {
+    if (err) {
+        console.log('Error connecting to ' + mdbUrl);
+    } else {
+        console.log('MongoDB connected!');
+    }
+});
+var db = mongoose.connection;
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-
-var MongoClient = require('mongodb').MongoClient;
-var ObjectId = require('mongodb').ObjectId;
+var auth = require('./routes/auth');
+var tutorials = require('./routes/tutorials');
 
 var app = express();
-var db;
 
-var addStatus;
-var getDate = (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
-var mdbUrl = "mongodb://admin:admin@ds111589.mlab.com:11589/top-youtube-videos-for-node-js-express-js"
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
-MongoClient.connect(mdbUrl, function(err, database) {
-    if (err) {
-        console.log(err)
-        return;
-    }
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: false
+}));
 
-    console.log("Connected to DB!");
+app.use(passport.initialize());
+app.use(passport.session());
 
-    // set database
-    db = database;
+var User = require('./models/users');
 
-	// view engine setup
-	app.set('views', path.join(__dirname, 'views'));
-	app.set('view engine', 'jade');
+app.use('/', index);
+app.use('/auth', auth);
+app.use('/tutorials', tutorials);
+app.get('/test', function(req, res){
+	res.render('test');
+});
 
-	// uncomment after placing your favicon in /public
-	//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-	app.use(logger('dev'));
-	app.use(bodyParser.json());
-	app.use(bodyParser.urlencoded({ extended: false }));
-	app.use(cookieParser());
-	app.use(express.static(path.join(__dirname, 'public')));
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  	var err = new Error('Not Found');
+  	err.status = 404;
+  	next(err);
+});
 
-	app.use('/', index);
-	
-	//List all the entries
-	app.get('/tutorials', function(req, res) {
-		var tutorialCollection = db.collection('tutorials');
-		tutorialCollection.find().toArray(function(err, tutorials) {
-			console.log('Tutorials Loaded!');
-			res.render('all_entries', {
-				title: 'All Entries',
-				tutorials: tutorials
-			});
-		})
-	});
+// error handler
+app.use(function(err, req, res, next) {
+  	// set locals, only providing error in development
+  	res.locals.message = err.message;
+  	res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-	//Sign_up
-	app.get('/sign_up', function(req, res) {
-		console.log();
-		var data = {
-			title: 'Sign Up'
-		}
-		res.render('sign_up', data);
-	});
-
-
-	//Login
-	app.get('/login', function(req, res) {
-		console.log();
-		var data = {
-			title: 'Login'
-		}
-		res.render('login', data);
-	});
-
-	//Test
-	app.get('/test', function(req, res) {
-		console.log();
-		var data = {
-			title: 'testing'
-		}
-		res.render('test', data);
-	});
-
-	//Adding New Entry
-	app.get('/tutorials/new', function(req, res) {
-		console.log();
-		var data = {
-			title: 'Add New Entry',
-			status: addStatus
-		}
-		res.render('new_entry', data);
-		addStatus = "";
-	});
-
-	//POST Method when submitting new Entry
-	app.post('/tutorials/new', function(req, res) {
-		var dataToSave = {
-			title: req.body.title,
-			uploadersName: req.body.uploadersName,
-			uploadersYoutubeLink: req.body.uploadersYoutubeLink,
-			youtubeLink: req.body.youtubeLink,
-			description: req.body.description,
-			publishDate: req.body.publishDate,
-			category: req.body.category,
-			views: req.body.views,
-			likes: req.body.likes,
-			created: getDate,
-			updated: getDate,
-			embed: req.body.embed
-		};
-
-		db.collection('tutorials')
-		  .save(dataToSave, function(err, tutorial) {
-		  	if(err) {
-		  		console.log('Saving Data Failed!');
-		  		addStatus = 'Saving Data Failed!';
-		  	}
-		  	else {
-		  		console.log('Saving Data Successful!');
-		  		addStatus = 'Saving Data Success';
-		  		res.redirect('/tutorials/new');
-		  	}
-		  });
-	});
-
-	//Page of each Entry
-	app.get('/tutorials/:videoId', function(req, res) {
-		var videoId = req.params.videoId;
-		var tutorialCollection = db.collection('tutorials');
-		tutorialCollection.findOne({_id: new ObjectId(videoId)}, function(err, info) {
-			res.render('entry', {
-				title: info.title,
-				videoInfo: info
-			});
-		}); 
-	});
-
-	//Edit Page
-	app.get('/tutorials/:videoId/edit', function(req, res) {
-		var videoId = req.params.videoId;
-		var tutorialCollection = db.collection('tutorials');
-		tutorialCollection.findOne({_id: new ObjectId(videoId)}, function(err, info) {
-			res.render('update_entry', {
-				title: 'Update Entry',
-				videoInfo: info
-			});
-		}); 
-	})
-
-	//POST Method when updating an entry
-	app.post('/tutorials/:videoId', function(req, res){
-
-		var videoId = req.params.videoId;
-
-		var newData = {
-			title: req.body.title,
-			uploadersName: req.body.uploadersName,
-			uploadersYoutubeLink: req.body.uploadersYoutubeLink,
-			youtubeLink: req.body.youtubeLink,
-			description: req.body.description,
-			publishDate: req.body.publishDate,
-			category: req.body.category,
-			views: req.body.views,
-			likes: req.body.likes,
-			embed: req.body.embed,
-			updated: getDate
-		}
-
-		
-		var tutorialCollection = db.collection('tutorials');
-		tutorialCollection.updateOne({_id: new ObjectId(videoId)}, {$set: newData}, function(err, result) {
-			if(err) {
-				console.log("Item not updated!");
-			}
-			else {
-				console.log("Item Updated!")
-				res.redirect('/tutorials/' + videoId)
-			}
-		}); 
-	});
-
-	//Delete Entry
-	app.get('/tutorials/:videoId/delete', function(req, res){
-		var videoId = req.params.videoId;
-		
-		var tutorialCollection = db.collection('tutorials');
-		tutorialCollection.deleteOne({_id: new ObjectId(videoId)}, function(err, result) {
-			if(err) {
-				console.log("Item not deleted!");
-			}
-			else {
-				console.log("Item deleted!")
-				res.redirect('/tutorials')
-			}
-		}); 
-	});
-
-	// catch 404 and forward to error handler
-	app.use(function(req, res, next) {
-  		var err = new Error('Not Found');
-  		err.status = 404;
-  		next(err);
-	});
-
-	// error handler
-	app.use(function(err, req, res, next) {
-  		// set locals, only providing error in development
-  		res.locals.message = err.message;
-  		res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  		// render the error page
-  		res.status(err.status || 500);
-  		res.render('error');
-	});
+  	// render the error page
+  	res.status(err.status || 500);
+  	res.render('error');
 });
 
 module.exports = app;

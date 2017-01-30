@@ -4,18 +4,21 @@ block content
   br
 
   .inputfield
-    form(method= 'POST', action= '/tutorials/new', onsubmit= 'return validateForm()')
+    form(method= 'post', action= '/auth/login')
       .container.rown
         h3.blue-text.center Member Login!
-        br
+
+        if (loginStatus)
+          h6.white-text.red(style= "padding: 1%")= loginStatus
+
         .row
           .col.s12.m12.l12
             .input-field.col.white-text
-              input#email.validate(type='email')
-              label(for='email', data-error='wrong', data-success='right') Email
+              input#username.validate(type='text', name= 'username')
+              label(for='first_name') Username
           .col.s12.m12.l12
             .input-field.col.white-text
-              input#password.validate(type='password')
+              input#password.validate(type='password', name= 'password')
               label(for='password') Password
         br 
         .row.center
@@ -27,4 +30,4 @@ block content
           p.center.white-text
               | Don't have account? Click 
               b
-                a.blue-text.link(href= 'http://localhost:3000/sign_up', target= '_blank')   Sign-Up     
+                a.blue-text.link(href= '/auth/register') Sign-Up     

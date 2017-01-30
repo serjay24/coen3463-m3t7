@@ -5,7 +5,8 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
 
   var data = {
-  	title: 'ExpressVids - The top NodeJS and Express Tutorial'
+  	title: 'ExpressVids - The top NodeJS and Express Tutorial',
+  	user: req.user
   }
 
   res.render('index', data);
