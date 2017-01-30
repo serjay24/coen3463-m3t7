@@ -58,42 +58,7 @@ function validateForm() {
 		checkCount++;
 	}
 
-	if (getDescription === "") {
-		errorMessage += "Description\n";
-	}
-	else {
-		checkCount++;
-	}
-
-	if (getPublishDate === "") {
-		errorMessage += "Publish Date\n";
-	}
-	else {
-		checkCount++;
-	}
-
-	if (getCategory === "") {
-		errorMessage += "Category\n";
-	}
-	else {
-		checkCount++;
-	}
-
-	if (getViews === "") {
-		errorMessage += "Number of Views\n";
-	}
-	else {
-		checkCount++;
-	}
-
-	if (getLikes === "") {
-		errorMessage += "Number of Likes\n";
-	}
-	else {
-		checkCount++;
-	}
-
-	if(checkCount === 9) {
+	if(checkCount === 4) {
 		return true;
 		checkCount = 0;
 	}
