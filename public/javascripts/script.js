@@ -110,7 +110,7 @@ function confirmDelete() {
 }
 
 function fieldValidate() {
-	var password1 = document.getElementById('password').value;
+	var password = document.getElementById('password').value;
 	var username = document.getElementById('username').value
 	var email = document.getElementById('email').value;
 
@@ -128,6 +128,18 @@ function fieldValidate() {
 		checkCount++;
 	}
 
+	if (username != "") {
+		if(checkUserName() === false) {
+			errorMessage += "Username - should not contain any numbers or special characters!\n";
+		}
+		else {
+			checkCount++;	
+		}	
+	}
+	else {
+		checkCount++;
+	}
+
 	if(email === "") {
 		errorMessage += "Email - should not be empty!\n"
 	}
@@ -135,14 +147,14 @@ function fieldValidate() {
 		checkCount++
 	}
 
-	if(password1 === "") {
+	if(password === "") {
 		errorMessage += "Password - should not be empty!\n";
 	}
 	else {
 		checkCount++;
 	}
 
-	if(checkCount === 3) {
+	if(checkCount === 4) {
 		return true;
 		checkCount = 0;
 	}
@@ -152,4 +164,13 @@ function fieldValidate() {
 		checkCount = 0;
 		errorMessage = "The following field/s are required, should not be empty, or should be corrected: \n\n";
 	}
+}
+
+function checkUserName() {
+    var username = document.getElementById("username").value;
+    var pattern = new RegExp(/[~.`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?0123456789]/); //unacceptable chars
+    if (pattern.test(username)) {
+        return false;
+    }
+    return true; //good user input
 }

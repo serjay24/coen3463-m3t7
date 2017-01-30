@@ -15,6 +15,7 @@ var loginStatus;
 
 
 router.get('/register', function(req, res) {
+  if(!req.user) {
     var data = {
       title: 'Sign Up',
       status: usernameStatus,
@@ -31,6 +32,10 @@ router.get('/register', function(req, res) {
     last_name = "";
     email = "";
     password = "";
+  }
+  else {
+    res.redirect('/');
+  }
 });
 
 router.post('/register', function(req, res) {
@@ -73,13 +78,17 @@ router.post('/register', function(req, res) {
 });
 
 router.get('/login', function(req, res) {
-  console.log();
+  if(!req.user) {
     var data = {
       title: 'Login',
       loginStatus: loginStatus
     }
     res.render('login', data);
     loginStatus = "";
+  }
+  else {
+    res.redirect('/');
+  }
 });
 
 passport.use(new LocalStrategy(
