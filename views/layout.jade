@@ -43,6 +43,10 @@ html
             a(href='/tutorials') All List
           li
             a(href='/tutorials/new') Add New Entry
+          if (user)
+            li
+              a(href='/auth/logout') Logout
+
         ul#mobile-demo.side-nav.blue
           li
             a.white-text.waves-effect.waves-white(href='/')
@@ -56,6 +60,11 @@ html
             a.white-text.waves-effect.waves-white(href='/tutorials/new')
               i.fa.fa-plus-square-o.left.small.white-text
               | Add New Entry
+          if (user)
+            li
+              a.white-text.waves-effect.waves-white(href='/auth/logout')
+                i.fa.fa-sign-out.left.small.white-text
+                | Logout
   
     block content
 

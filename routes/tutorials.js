@@ -23,7 +23,8 @@ router.get('/', function(req, res){
   Entry.find(function(err, tutorials){
     res.render('all_entries', {
         title: 'All Entries',
-        tutorials: tutorials
+        tutorials: tutorials,
+        user: req.user
       });
   })
 });
@@ -33,7 +34,8 @@ router.get('/new', function(req, res) {
   console.log();
   var data = {
     title: 'Add New Entry',
-    status: addStatus
+    status: addStatus,
+    user: req.user
   }
   res.render('new_entry', data);
   addStatus = "";
@@ -75,7 +77,8 @@ router.get('/:videoId', function(req, res) {
   Entry.findById(videoId, function(err, info){
     res.render('entry', {
         title: info.title,
-        videoInfo: info
+        videoInfo: info,
+        user: req.user
       });
   });
 });
@@ -86,7 +89,8 @@ router.get('/:videoId/edit', function(req, res) {
   Entry.findById(videoId, function(err, info) {
     res.render('update_entry', {
         title: 'Update Entry',
-        videoInfo: info
+        videoInfo: info,
+        user: req.user
     })
   })
 });
