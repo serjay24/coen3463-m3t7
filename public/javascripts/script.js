@@ -139,3 +139,32 @@ function checkUserName() {
     }
     return true; //good user input
 }
+
+if (window.location.pathname === '/tutorials') {
+
+	fetch('api/v1/entry/count').then(function(res){
+		res.json().then(function(count){
+			console.log('count', count)
+			var totalCount = document.getElementById('totalCount');
+			setTimeout(function() {
+				totalCount.innerHTML = count.count;
+			}, 3000)
+			
+		});
+	});
+
+	fetch('api/v1/entry').then(function(res) {
+		res.json().then(function(entry) {
+			console.log('entry', entry);
+			var tbody = document.getElementById('data');
+			setTimeout(function() {
+				entry.forEach(function(entry) {
+	        	tbody.insertAdjacentHTML('beforeend', '<tr><td>' + entry.uploadersName + '</td>' +
+	        		'<td><a href="/tutorials/' + entry._id + '", class= "red-text">' + entry.title + '</td><td>' +
+	        		entry.description + '</td><td>' + entry.created + '</td><td>' +
+	        		entry.updated + '</td></tr>');
+	      	});
+	      }, 1500);
+	    })
+	 });
+}

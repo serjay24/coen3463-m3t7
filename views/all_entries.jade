@@ -5,6 +5,9 @@ block content
   h1.white-text.center List of Node.js and Express Tutorials
 
   br
+  br
+
+  h1#totalCount.white-text Hello World
 
   table.striped.bordered
     thead
@@ -14,12 +17,12 @@ block content
         th(style= 'width: 30%') Description
         th(style= 'width: 5%') Date Created
         th(style= 'width: 5%') Date Updated
-    tbody
-      each tutorial, i in tutorials
-          tr
-            td= tutorial.uploadersName
-            td
-              a.red-text(href= "/tutorials/" + tutorial._id)= tutorial.title
-            td= tutorial.description
-            td= tutorial.created
-            td= tutorial.updated
+    tbody#data
+      //each tutorial, i in tutorials
+          //tr
+            //td= tutorial.uploadersName
+            //td
+              //a.red-text(href= "/tutorials/" + tutorial._id)= tutorial.title
+            //td= tutorial.description
+            //td= tutorial.created
+            //td= tutorial.updated

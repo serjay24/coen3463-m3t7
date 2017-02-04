@@ -11,6 +11,10 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongo = require('mongodb');
 
+const methodOverride = require('method-override');
+const restify = require('express-restify-mongoose');
+const router = express.Router();
+
 var mdbUrl = "mongodb://admin:admin@ds111589.mlab.com:11589/top-youtube-videos-for-node-js-express-js";
 var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }, 
                 replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };
@@ -52,6 +56,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 var User = require('./models/users');
+var entry = require('./models/entry');
+
+restify.serve(router, entry);
+app.use(router);
 
 app.use('/', index);
 app.use('/auth', auth);
