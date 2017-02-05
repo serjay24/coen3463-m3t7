@@ -7,17 +7,19 @@ block content
   br
   br
 
- 
-
-  .search
-      h1#totalCount.white-text Total Number of tutorials
-      form.green.lighten-3(style= 'width: 35% ; margin-left: 62%')
+  nav.transparent
+    .nav-wrapper
+      form.green.lighten-3(method= 'post', action= '/tutorials', onsubmit= 'getSearch()')
         .input-field
-          input#search(type='search', placeholder="search tutorial")
-          label(for='search'): i.fa.fa-search.left.small.white-text |Search Tutorial
-          i.mdi-navigation-close.close
+          input#search(type= 'search', placeholder= 'Search Tutorial')
+          label.label-icon(for= 'search')
+            i.fa.fa-search.small
+  
+  br
 
-  table.striped.bordered.responsive-table
+  h4#banner-description.center.white-text
+
+  table.striped.bordered.responsive-table#result
     thead
       tr
         th(style= 'width: auto') Uploaded by

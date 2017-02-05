@@ -140,31 +140,64 @@ function checkUserName() {
     return true; //good user input
 }
 
+var search;
+
+function getSearch() {
+	localStorage.setItem("search", document.getElementById('search').value);
+}
+
 if (window.location.pathname === '/tutorials') {
 
-	fetch('api/v1/entry/count').then(function(res){
-		res.json().then(function(count){
-			console.log('count', count)
-			var totalCount = document.getElementById('totalCount');
-			setTimeout(function() {
-				totalCount.innerHTML = count.count;
-			}, 3000)
-			
-		});
-	});
-
-	fetch('api/v1/entry?sort=-created').then(function(res) {
-		res.json().then(function(entry) {
-			console.log('entry', entry);
-			var tbody = document.getElementById('data');
-			setTimeout(function() {
+	if (localStorage.getItem("search") === 'null') {
+		fetch('api/v1/entry?sort=created').then(function(res) {
+			res.json().then(function(entry) {
+				console.log('entry', entry);
+				var tbody = document.getElementById('data');
 				entry.forEach(function(entry) {
-	        	tbody.insertAdjacentHTML('beforeend', '<tr><td>' + entry.uploadersName + '</td>' +
+	        		tbody.insertAdjacentHTML('beforeend', '<tr><td>' + entry.uploadersName + '</td>' +
 	        		'<td><a href="/tutorials/' + entry._id + '", class= "red-text">' + entry.title + '</td><td>' +
 	        		entry.description + '</td><td>' + entry.created + '</td><td>' +
 	        		entry.updated + '</td></tr>');
-	      	});
-	      }, 1500);
-	    })
-	 });
+	      		});
+	    	});
+	 	});
+
+	 	fetch('api/v1/entry/count').then(function(res){
+			res.json().then(function(count){
+				console.log('count', count)
+				var banner = document.getElementById('banner-description');
+				banner.innerHTML = 'There are ' + count.count + ' tutorials available to watch!';
+			});
+		});
+	}
+	else {
+		fetch('api/v1/entry?query={"title":"~(' + localStorage.getItem("search") + ')"}').then(function(res) {
+			res.json().then(function(result) {
+
+				if (result.length === 0) {
+					document.getElementById('banner-description').innerHTML = "No entry found related to " + 
+					localStorage.getItem("search");
+
+					document.getElementById('result').style.visibility = "hidden";
+				}
+				else if (result.length === 1) {
+					document.getElementById('banner-description').innerHTML = "Found " + result.length +
+				" entry related to " + localStorage.getItem("search");
+				}
+				else {
+					document.getElementById('banner-description').innerHTML = "Found " + result.length +
+				" entries related to " + localStorage.getItem("search");
+				}
+				
+				var tbody = document.getElementById('data');
+				result.forEach(function(result) {
+					tbody.insertAdjacentHTML('beforeend', '<tr><td>' + result.uploadersName + '</td>' +
+	        		'<td><a href="/tutorials/' + result._id + '", class= "red-text">' + result.title + '</td><td>' +
+	        		result.description + '</td><td>' + result.created + '</td><td>' +
+	        		result.updated + '</td></tr>');
+				});
+				localStorage.setItem("search", null);
+			});
+		});
+	}
 }

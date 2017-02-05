@@ -29,6 +29,10 @@ router.get('/', function(req, res){
   })
 });
 
+router.post('/', function(req, res){
+  res.redirect('/tutorials')
+})
+
 //GET New Entry Page
 router.get('/new', function(req, res) {
   console.log();
