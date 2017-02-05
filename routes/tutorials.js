@@ -20,7 +20,7 @@ router.use(function(req, res, next) {
 
 //GET List of Tutorials
 router.get('/', function(req, res){
-  Entry.find(function(err, tutorials){
+  Entry.find().sort({created: 'descending'}).exec(function(err, tutorials){
     res.render('all_entries', {
         title: 'All Entries',
         tutorials: tutorials,

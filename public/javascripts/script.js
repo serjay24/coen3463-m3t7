@@ -153,7 +153,7 @@ if (window.location.pathname === '/tutorials') {
 		});
 	});
 
-	fetch('api/v1/entry').then(function(res) {
+	fetch('api/v1/entry?sort=-created').then(function(res) {
 		res.json().then(function(entry) {
 			console.log('entry', entry);
 			var tbody = document.getElementById('data');
