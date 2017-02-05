@@ -10,14 +10,14 @@ var getDate = (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullY
 var mdbUrl = "mongodb://admin:admin@ds111589.mlab.com:11589/top-youtube-videos-for-node-js-express-js"
 
 var addStatus;
-/*
+
 router.use(function(req, res, next) {
   if (!req.user) {
     res.redirect('/auth/login')
   }
   next();
 });
-*/
+
 //GET List of Tutorials
 router.get('/', function(req, res){
   Entry.find().sort({created: 'descending'}).exec(function(err, tutorials){
