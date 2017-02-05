@@ -99,8 +99,8 @@ tbody {
 }
 
 table {
-    margin: auto;
-    width: 95%;
+    margin: 3%;
+    width: auto;
     border-radius: 5px;
 }
 .container.rown{

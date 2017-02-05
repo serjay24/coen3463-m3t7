@@ -7,16 +7,24 @@ block content
   br
   br
 
-  h1#totalCount.white-text Hello World
+ 
 
-  table.striped.bordered
+  .search
+      h1#totalCount.white-text Total Number of tutorials
+      form.green.lighten-3(style= 'width: 35% ; margin-left: 62%')
+        .input-field
+          input#search(type='search', placeholder="search tutorial")
+          label(for='search'): i.fa.fa-search.left.small.white-text |Search Tutorial
+          i.mdi-navigation-close.close
+
+  table.striped.bordered.responsive-table
     thead
       tr
-        th(style= 'width: 10%') Uploaded by
-        th(style= 'width: 30%') Title
-        th(style= 'width: 30%') Description
-        th(style= 'width: 5%') Date Created
-        th(style= 'width: 5%') Date Updated
+        th(style= 'width: auto') Uploaded by
+        th(style= 'width: auto') Title
+        th(style= 'width: auto') Description
+        th(style= 'width: auto') Date Created
+        th(style= 'width: auto') Date Updated
     tbody#data
       //each tutorial, i in tutorials
           //tr
