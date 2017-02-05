@@ -197,7 +197,7 @@ if (window.location.pathname === '/tutorials') {
 					document.getElementById('banner-description').innerHTML = "No entry found related to " + 
 					localStorage.getItem("search");
 
-					document.getElementById('result').style.visibility = "hidden";
+					document.getElementById('result').style.display = "none";
 				}
 				else if (result.length === 1) {
 
