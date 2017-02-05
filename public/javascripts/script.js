@@ -140,13 +140,18 @@ function checkUserName() {
     return true; //good user input
 }
 
-var search;
-
+//This function gets the value of searchbox and store it in the web browser's storage
 function getSearch() {
 	localStorage.setItem("search", document.getElementById('search').value);
 }
 
 if (window.location.pathname === '/tutorials') {
+	
+	/*
+	 * By default the value of search box is null
+	 * When it is null, it will load the database fetch using the API and then sort it by
+	 * the oldest date of the entry created.
+	 */
 
 	if (localStorage.getItem("search") === 'null') {
 		fetch('api/v1/entry?sort=created').then(function(res) {
@@ -162,6 +167,10 @@ if (window.location.pathname === '/tutorials') {
 	    	});
 	 	});
 
+	 	/*
+		 * Get the total count of the database
+	 	 */
+
 	 	fetch('api/v1/entry/count').then(function(res){
 			res.json().then(function(count){
 				console.log('count', count)
@@ -170,23 +179,43 @@ if (window.location.pathname === '/tutorials') {
 			});
 		});
 	}
+
+	/*
+	 * If the searchbox is not empty it will get the value then display all the entry
+	 * related on what the user type in.
+	 */
+
 	else {
 		fetch('api/v1/entry?query={"title":"~(' + localStorage.getItem("search") + ')"}').then(function(res) {
 			res.json().then(function(result) {
 
 				if (result.length === 0) {
+					document.getElementById('allLinks').insertAdjacentHTML('beforeend', '<a href="/tutorials"' +
+						' style= "text-transform: capitalize" class= "waves-effect waves-light btn-flat center black' +
+						' white-text">See all tutorials</a>')
+
 					document.getElementById('banner-description').innerHTML = "No entry found related to " + 
 					localStorage.getItem("search");
 
 					document.getElementById('result').style.visibility = "hidden";
 				}
 				else if (result.length === 1) {
+
+					document.getElementById('allLinks').insertAdjacentHTML('beforeend', '<a href="/tutorials"' +
+						' style= "text-transform: capitalize" class= "waves-effect waves-light btn-flat center black' +
+						' white-text">See all tutorials</a>')
+
 					document.getElementById('banner-description').innerHTML = "Found " + result.length +
-				" entry related to " + localStorage.getItem("search");
+					" entry related to " + localStorage.getItem("search");
 				}
 				else {
+
+					document.getElementById('allLinks').insertAdjacentHTML('beforeend', '<a href="/tutorials"' +
+						' style= "text-transform: capitalize" class= "waves-effect waves-light btn-flat center black' +
+						' white-text">See all tutorials</a>')
+
 					document.getElementById('banner-description').innerHTML = "Found " + result.length +
-				" entries related to " + localStorage.getItem("search");
+					" entries related to " + localStorage.getItem("search");
 				}
 				
 				var tbody = document.getElementById('data');

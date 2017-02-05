@@ -9,14 +9,18 @@ block content
 
   nav.transparent
     .nav-wrapper
-      form.green.lighten-3(method= 'post', action= '/tutorials', onsubmit= 'getSearch()')
+      form.white(method= 'post', action= '/tutorials', onsubmit= 'getSearch()')
         .input-field
           input#search(type= 'search', placeholder= 'Search Tutorial')
           label.label-icon(for= 'search')
-            i.fa.fa-search.small
+            i.fa.fa-search.small.black-text
   
   br
+  br
+  .container.center#allLinks
 
+  br
+  
   h4#banner-description.center.white-text
 
   table.striped.bordered.responsive-table#result
