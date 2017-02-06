@@ -14,12 +14,12 @@ block content
         .row
           .col.s12.m12.l12
             .input-field.col.white-text
-              input#username.validate(type='text', name= 'username')
-              label(for='first_name') Username
+              input#username.validate(type='text', name= 'username', pattern= '[A-Za-z]{8,}', required)
+              label(for='first_name', data-error='Invalid username') Username
           .col.s12.m12.l12
             .input-field.col.white-text
-              input#password.validate(type='password', name= 'password')
-              label(for='password') Password
+              input#password.validate(type='password', name= 'password', required)
+              label(for='password', data-error='Invalid Password') Password
         br 
         .row.center
           button.btn.waves-effect.waves-light(type='submit', name='action')

@@ -153,7 +153,7 @@ if (window.location.pathname === '/tutorials') {
 	 * the oldest date of the entry created.
 	 */
 
-	if (localStorage.getItem("search") === 'null') {
+	if (localStorage.getItem("search") === 'null' || localStorage.getItem("search") === null) {
 		fetch('api/v1/entry?sort=created').then(function(res) {
 			res.json().then(function(entry) {
 				console.log('entry', entry);
