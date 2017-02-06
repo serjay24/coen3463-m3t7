@@ -9,7 +9,7 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var flash = require('connect-flash');
+var mongo = require('mongodb');
 
 const methodOverride = require('method-override');
 const restify = require('express-restify-mongoose');
@@ -56,21 +56,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 var User = require('./models/users');
-passport.use(User.createStrategy());
-
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-
-
-app.use(flash());
-
-app.use(function(req, res, next){
-  res.locals.success_msg = req.flash('success_msg');
-  res.locals.error_msg = req.flash('error_msg');
-  res.locals.error = req.flash('error');
-  next();
-});
-
 var entry = require('./models/entry');
 
 restify.serve(router, entry);
@@ -82,7 +67,9 @@ app.use('/tutorials', tutorials);
 app.get('/test', function(req, res){
 	res.render('test');
 });
-
+app.get('/search', function(req, res){
+	res.render('search');
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   	var err = new Error('Not Found');

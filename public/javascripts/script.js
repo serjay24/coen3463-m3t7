@@ -3,15 +3,17 @@ $(document).ready(function(){
       $(".button-collapse").sideNav({
       	menuWidth: 200
       });
+      Materialize.updateTextFields();
+
+      if ($('#alert').text().length > 0) {
+      	$('#alert').addClass("red");
+      }
+
 });
 
  $('.datepicker').pickadate({
     selectMonths: true, // Creates a dropdown to control month
     selectYears: 100 // Creates a dropdown of 15 years to control year
-  });
- 
- $(document).ready(function() {
-    Materialize.updateTextFields();
   });
 
 function validateForm() {

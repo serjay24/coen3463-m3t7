@@ -8,8 +8,18 @@ block content
       .container.rown
         h3.blue-text.center Member Login!
 
-        if (loginStatus)
-          h6.white-text.red(style= "padding: 1%")= loginStatus
+        .green.darken-3.white-text
+          h5.center
+            | Notice to Users!
+          h6
+            | We have change the way we authenticate the user. Due to these changes, 
+            | all of your account and credentials from the database has been deleted as the new 
+            | authentication system does not support the old one. Please register again by clicking the 
+            | Sign-Up below. We're very sorry from the inconvenience.
+
+        if (error)
+          h6#alert.white-text(style= "padding: 1%")= error
+        else
 
         .row
           .col.s12.m12.l12
