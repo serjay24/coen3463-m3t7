@@ -2,17 +2,22 @@ extends layout
 
 block content
 
-  .navbar-fixed
-    nav.transparent
-      .nav-wrapper
-        form.white(method= 'post', action= '/tutorials', onsubmit= 'getSearch()')
-          .input-field
-            input#search(type= 'search', placeholder= 'Search Tutorial')
-            label.label-icon(for= 'search')
-              i.fa.fa-search.small.black-text
+  
 
   h1.white-text.center List of Node.js and Express Tutorials
+
+  br
+  br
+
+  nav.transparent
+    .nav-wrapper
+      form.white(method= 'post', action= '/tutorials', onsubmit= 'getSearch()')
+        .input-field
+          input#search(type= 'search', placeholder= 'Search Tutorial')
+          label.label-icon(for= 'search')
+            i.fa.fa-search.small.black-text
   
+  br
   br
   .container.center#allLinks
 
