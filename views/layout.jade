@@ -25,46 +25,47 @@ html
 
   body
 
-    nav
-      .nav-wrapper
-        a.brand-logo.left.hide-on-small-only(href='/')
-          img(src= '../../images/logo-large.png')
-        a.brand-logo.center.hide-on-med-and-up(href='/')
-          img(src= '../../images/logo.png')
+    .navbar-fixed
+      nav
+        .nav-wrapper
+          a.brand-logo.left.hide-on-small-only(href='/')
+            img(src= '../../images/logo-large.png')
+          a.brand-logo.center.hide-on-med-and-up(href='/')
+            img(src= '../../images/logo.png')
 
-        a.button-collapse(href='#', data-activates='mobile-demo')
-          i.fa.fa-bars.small
-        ul#nav-mobile.left.hide-on-med-and-down.right
-          li
-            a(href='/')
-              i.fa.fa-home.left.small
-              | Home
-          li
-            a(href='/tutorials') All List
-          li
-            a(href='/tutorials/new') Add New Entry
-          if (user)
+          a.button-collapse(href='#', data-activates='mobile-demo')
+            i.fa.fa-bars.small
+          ul#nav-mobile.left.hide-on-med-and-down.right
             li
-              a(href='/auth/logout') Logout
+              a(href='/')
+                i.fa.fa-home.left.small
+                | Home
+            li
+              a(href='/tutorials') All List
+            li
+              a(href='/tutorials/new') Add New Entry
+            if (user)
+              li
+                a(href='/auth/logout') Logout
 
-        ul#mobile-demo.side-nav.blue
-          li
-            a.white-text.waves-effect.waves-white(href='/')
-              i.fa.fa-home.left.small.white-text
-              | Home
-          li
-            a.white-text.waves-effect.waves-white(href='/tutorials')
-              i.fa.fa-search.left.small.white-text
-              | All List
-          li
-            a.white-text.waves-effect.waves-white(href='/tutorials/new')
-              i.fa.fa-plus-square-o.left.small.white-text
-              | Add New Entry
-          if (user)
+          ul#mobile-demo.side-nav.blue
             li
-              a.white-text.waves-effect.waves-white(href='/auth/logout')
-                i.fa.fa-sign-out.left.small.white-text
-                | Logout
+              a.white-text.waves-effect.waves-white(href='/')
+                i.fa.fa-home.left.small.white-text
+                | Home
+            li
+              a.white-text.waves-effect.waves-white(href='/tutorials')
+                i.fa.fa-search.left.small.white-text
+                | All List
+            li
+              a.white-text.waves-effect.waves-white(href='/tutorials/new')
+                i.fa.fa-plus-square-o.left.small.white-text
+                | Add New Entry
+            if (user)
+              li
+                a.white-text.waves-effect.waves-white(href='/auth/logout')
+                  i.fa.fa-sign-out.left.small.white-text
+                  | Logout
   
     block content
 
